@@ -12,11 +12,9 @@ using (var client = new ClientWebSocket())
 {
     using (var feed = new GdaxFeedApi(client, new MyErrorLogger()))
     {
-        var task = feed.RunLoopAsync(cts.Token);
-
         using (feed.StartMatchChannel(new MyPriceObserver(), "BTC-EUR"))
         {
-            await task;
+            await feed.RunLoopAsync(cts.Token);
         }
     }
 }
