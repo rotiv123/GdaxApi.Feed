@@ -1,6 +1,8 @@
 # GdaxApi.Feed
 The GDAX Websocket Feed provides real-time market data updates for orders and trades.
 
+[![Build](https://ci.appveyor.com/api/projects/status/dwrbqqulrl1u6v7g?svg=true)](https://ci.appveyor.com/project/rotiv123/gdaxapi-feed)
+
 ## Quick Start
 
 ```cs
