@@ -18,19 +18,22 @@
 
         protected override void OnNext(JObject message)
         {
-            var t = new Heartbeat(message);
-            Notify(t);
+            Notify(new Heartbeat(
+                        message["time"].ToObject<DateTimeOffset>(),
+                        message.Value<string>("product_id"),
+                        message.Value<long>("sequence"),
+                        message.Value<long>("last_trade_id")));
         }
     }
 
     public class Heartbeat
     {
-        public Heartbeat(JObject message)
+        public Heartbeat(DateTimeOffset timestamp, string productId, long sequence, long lastTradeId)
         {
-            this.Timestamp = message["time"].ToObject<DateTimeOffset>();
-            this.ProductId = message.Value<string>("product_id");
-            this.Sequence = message.Value<long>("sequence");
-            this.LastTradeId = message.Value<long>("last_trade_id");
+            this.Timestamp = timestamp;
+            this.ProductId = productId;
+            this.Sequence = sequence;
+            this.LastTradeId = lastTradeId;
         }
 
         public DateTimeOffset Timestamp { get; }

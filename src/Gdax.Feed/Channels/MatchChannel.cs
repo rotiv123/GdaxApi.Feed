@@ -18,20 +18,24 @@
 
         protected override void OnNext(JObject message)
         {
-            var t = new PriceMatch(message);
-            Notify(t);
+            Notify(new PriceMatch(
+                        message["time"].ToObject<DateTimeOffset>(),
+                        message.Value<string>("product_id"),
+                        message.Value<decimal>("size"),
+                        message.Value<decimal>("price"),
+                        message.Value<string>("side")));
         }
     }
 
     public class PriceMatch
     {
-        public PriceMatch(JObject message)
+        public PriceMatch(DateTimeOffset timestamp, string productId, decimal size, decimal price, string side)
         {
-            this.Timestamp = message["time"].ToObject<DateTimeOffset>();
-            this.ProductId = message.Value<string>("product_id");
-            this.Size = message.Value<decimal>("size");
-            this.Price = message.Value<decimal>("price");
-            this.Side = message.Value<string>("side");
+            this.Timestamp = timestamp;
+            this.ProductId = productId;
+            this.Size = size;
+            this.Price = price;
+            this.Side = side;
         }
 
         public DateTimeOffset Timestamp { get; }
