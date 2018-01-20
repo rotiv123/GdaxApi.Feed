@@ -1,7 +1,8 @@
 # GdaxApi.Feed
 The GDAX Websocket Feed provides real-time market data updates for orders and trades.
 
-[![Build](https://ci.appveyor.com/api/projects/status/dwrbqqulrl1u6v7g?svg=true)](https://ci.appveyor.com/project/rotiv123/gdaxapi-feed)
+[![Build](https://ci.appveyor.com/api/projects/status/dwrbqqulrl1u6v7g?svg=true)](https://ci.appveyor.com/project/rotiv123/gdaxapi-feed) [![NuGet](https://img.shields.io/nuget/v/Gdax.Feed.svg)](https://www.nuget.org/packages/Gdax.Feed/)
+
 
 ## Quick Start
 
@@ -15,7 +16,7 @@ using (var client = new ClientWebSocket())
 
         using (feed.StartMatchChannel(new MyPriceObserver(), "BTC-EUR"))
         {
-			await task;
+            await task;
         }
     }
 }
